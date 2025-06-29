@@ -7,7 +7,15 @@ class HeatSimulator:
     def __init__(self, grid):
         self.grid = grid
 
-    def update(self, alpha=0.1, dt = 1, dx = 1.0, dy = 1.0):
+    def update(self, alpha=0.1, dt = 1.0, dx = 1.0, dy = 1.0):
+        """
+        Updates the heat grid using finite difference method.
+
+        Parameters:
+        alpha (float): thermal diffusivity
+        dt (float): time step
+        dx, dy (float): spatial resolution
+        """
         m,n = self.grid.shape
         new_grid = np.zeros((m, n))
         for i in range(m):
@@ -31,6 +39,9 @@ class HeatSimulator:
         self.grid = new_grid
 
     def display(self):
+        """
+        shows the image of the current 2D grid
+        """
         plt.imshow(self.grid, cmap="hot", interpolation="nearest")
         plt.colorbar(label="Temperature")
         plt.title("Heat Distribution")
@@ -39,6 +50,9 @@ class HeatSimulator:
         plt.show()
 
     def animate(self, steps = 100, interval = 30):
+        """
+        shows an animation of the heat distribution
+        """
         fig, ax = plt.subplots()
         im = ax.imshow(self.grid, cmap='hot', interpolation='nearest')
         plt.colorbar(im, ax=ax)
